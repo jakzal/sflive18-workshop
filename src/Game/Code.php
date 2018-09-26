@@ -28,6 +28,7 @@ class Code
 
     public static function fromColours(array $array)
     {
+        return new self([]);
     }
 
     /**
