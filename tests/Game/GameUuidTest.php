@@ -14,4 +14,12 @@ class GameUuidTest extends TestCase
         $this->assertInstanceOf(GameUuid::class, $uuid);
         $this->assertSame('ecd7d239-4943-48f1-9c5e-48a964d4cdf0', (string) $uuid);
     }
+
+    public function test_it_creates_a_new_uuid()
+    {
+        $uuid = GameUuid::generated();
+
+        $this->assertInstanceOf(GameUuid::class, $uuid);
+        $this->assertStringMatchesFormat('%s-%s-%s-%s-%s', (string) $uuid);
+    }
 }
