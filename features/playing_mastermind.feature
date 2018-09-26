@@ -1,4 +1,3 @@
-@wip
 Feature: Playing mastermind
   As a code breaker
   I want to practice breaking codes
