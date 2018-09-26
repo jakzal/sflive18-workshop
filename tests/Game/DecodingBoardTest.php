@@ -184,4 +184,15 @@ class DecodingBoardTest extends TestCase
 
         $this->assertTrue($this->board->isGameFinished());
     }
+
+    public function test_the_game_is_not_finished_if_there_are_any_attempts_left()
+    {
+        $this->feedback->exactMatches()->willReturn(1);
+
+        for ($i = 0; $i < self::NUMBER_OF_ATTEMPTS - 1; $i++) {
+            $this->board->makeGuess($this->guessCode->reveal());
+        }
+
+        $this->assertFalse($this->board->isGameFinished());
+    }
 }
