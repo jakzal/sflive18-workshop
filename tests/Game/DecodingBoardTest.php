@@ -13,6 +13,7 @@ use Prophecy\Prophecy\ObjectProphecy;
 class DecodingBoardTest extends TestCase
 {
     const NUMBER_OF_ATTEMPTS = 8;
+    const SECRET_LENGTH = 4;
 
     /**
      * @var DecodingBoard
@@ -25,7 +26,7 @@ class DecodingBoardTest extends TestCase
     private $uuid;
 
     /**
-     * @var Feedback
+     * @var Feedback|ObjectProphecy
      */
     private $feedback;
 
@@ -42,11 +43,11 @@ class DecodingBoardTest extends TestCase
     protected function setUp()
     {
         $this->uuid = GameUuid::existing('547bf8e4-1a9c-492e-a0cf-165b809585a2');
-        $this->feedback = $this->prophesize(Feedback::class)->reveal();
+        $this->feedback = $this->prophesize(Feedback::class);
         $this->guessCode = $this->prophesize(Code::class);
         $this->secretCode = $this->prophesize(Code::class);
 
-        $this->secretCode->match($this->guessCode)->willReturn($this->feedback);
+        $this->secretCode->match($this->guessCode)->willReturn($this->feedback->reveal());
 
         $this->board = new DecodingBoard($this->uuid, $this->secretCode->reveal(), self::NUMBER_OF_ATTEMPTS);
     }
@@ -57,7 +58,7 @@ class DecodingBoardTest extends TestCase
 
         $feedback = $this->board->makeGuess($this->guessCode->reveal());
 
-        $this->assertSame($this->feedback, $feedback);
+        $this->assertSame($this->feedback->reveal(), $feedback);
     }
 
     public function test_makeGuess_throws_a_NoAttemptsLeftException_if_number_of_attempts_is_exceeded()
@@ -114,5 +115,15 @@ class DecodingBoardTest extends TestCase
     public function test_lastFeedback_returns_null_for_last_feedback_if_there_was_no_guess_attempt_yet()
     {
         $this->assertNull($this->board->lastFeedback());
+    }
+
+    public function test_the_game_is_won_if_all_colours_and_positions_are_guessed()
+    {
+        $this->secretCode->length()->willReturn(self::SECRET_LENGTH);
+        $this->feedback->exactMatches()->willReturn(self::SECRET_LENGTH);
+
+        $this->board->makeGuess($this->guessCode->reveal());
+
+        $this->assertTrue($this->board->isGameWon());
     }
 }
