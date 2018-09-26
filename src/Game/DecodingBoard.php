@@ -18,7 +18,7 @@ class DecodingBoard
 
     public function makeGuess(Code $guessCode): Feedback
     {
-        if (count($this->feedback) >= $this->numberOfAttempts) {
+        if ($this->hasAnyAttemptsLeft()) {
             throw new NoAttemptsLeftException($this->numberOfAttempts);
         }
 
@@ -31,5 +31,10 @@ class DecodingBoard
     public function allFeedback(): array
     {
         return $this->feedback;
+    }
+
+    private function hasAnyAttemptsLeft(): bool
+    {
+        return count($this->feedback) >= $this->numberOfAttempts;
     }
 }
