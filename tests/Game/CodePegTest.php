@@ -3,6 +3,7 @@
 namespace App\Tests\Game;
 
 use App\Game\CodePeg;
+use App\Game\UnknownColourException;
 use PHPUnit\Framework\TestCase;
 
 class CodePegTest extends TestCase
@@ -28,5 +29,13 @@ class CodePegTest extends TestCase
         $anotherCodePeg = new CodePeg('Green');
 
         $this->assertFalse($codePeg->equals($anotherCodePeg));
+    }
+
+    public function test_it_throws_an_unknown_colour_exception_if_initialized_with_an_unsupported_colour()
+    {
+        $this->expectException(UnknownColourException::class);
+        $this->expectExceptionMessageRegExp('#Unknown colour "Yellowish", the only supported colours are: ".*?".#');
+
+        new CodePeg('Yellowish');
     }
 }
