@@ -39,9 +39,9 @@ class CodeTest extends TestCase
     }
 
     /**
-     * @dataProvider provideExactMatches
+     * @dataProvider provideExactAndNearMatches
      */
-    public function test_match_gives_feedback_on_exact_matches(string $codeString, string $anotherCodeString, int $expectedMatches)
+    public function test_match_gives_feedback_on_exact_and_near_matches(string $codeString, string $anotherCodeString, int $expectedExactMatches, int $expectedNearMatches)
     {
         $code = Code::fromString($codeString);
         $anotherCode = Code::fromString($anotherCodeString);
@@ -49,31 +49,36 @@ class CodeTest extends TestCase
         $feedback = $code->match($anotherCode);
 
         $this->assertSame($anotherCode, $feedback->guessCode());
-        $this->assertSame($expectedMatches, $feedback->exactMatches());
+        $this->assertSame($expectedExactMatches, $feedback->exactMatches());
+        $this->assertSame($expectedNearMatches, $feedback->nearMatches());
     }
 
-    public function provideExactMatches()
+    public function provideExactAndNearMatches()
     {
         return [
             [
                 'Red Green Yellow Blue',
                 'Purple Purple Purple Purple',
                 0,
+                0,
             ],
             [
                 'Red Green Yellow Blue',
                 'Red Purple Purple Purple',
                 1,
+                0,
             ],
             [
                 'Red Green Yellow Blue',
                 'Red Green Purple Purple',
                 2,
+                0,
             ],
             [
                 'Red Green Yellow Blue',
                 'Red Green Yellow Blue',
                 4,
+                0,
             ],
         ];
     }
