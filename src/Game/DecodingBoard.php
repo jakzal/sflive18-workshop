@@ -8,6 +8,7 @@ class DecodingBoard
     private $secretCode;
     private $numberOfAttempts;
     private $attemptsUsed = 0;
+    private $feedback = [];
 
     public function __construct(GameUuid $gameUuid, Code $secretCode, int $numberOfAttempts)
     {
@@ -24,6 +25,14 @@ class DecodingBoard
 
         $this->attemptsUsed++;
 
-        return $this->secretCode->match($guessCode);
+        return $this->feedback[] = $this->secretCode->match($guessCode);
+    }
+
+    /**
+     * @return Feedback[]
+     */
+    public function allFeedback(): array
+    {
+        return $this->feedback;
     }
 }
