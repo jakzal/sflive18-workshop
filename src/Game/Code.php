@@ -51,13 +51,12 @@ class Code
 
     private function exactMatches(Code $anotherCode): int
     {
-        $exactMatches = 0;
-
-        foreach ($this->codePegs as $position => $peg) {
-            if ($anotherCode->hasSamePegOnPosition($position, $peg)) {
-                $exactMatches++;
-            }
-        }
-        return $exactMatches;
+        return \count(\array_filter(
+            $this->codePegs,
+            function (CodePeg $codePeg, int $position) use ($anotherCode) {
+                return $anotherCode->hasSamePegOnPosition($position, $codePeg);
+            },
+            ARRAY_FILTER_USE_BOTH
+        ));
     }
 }
