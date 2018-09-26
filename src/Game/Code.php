@@ -41,22 +41,21 @@ class Code
 
     public function match(Code $anotherCode): Feedback
     {
-        return new Feedback($anotherCode, $this->exactMatches($anotherCode), 0);
-    }
-
-    private function hasSamePegOnPosition(int $position, CodePeg $peg): bool
-    {
-        return $peg->equals($this->codePegs[$position]);
+        return new Feedback($anotherCode, $this->exactMatches($anotherCode), $this->nearMatches($anotherCode));
     }
 
     private function exactMatches(Code $anotherCode): int
     {
-        return \count(\array_filter(
-            $this->codePegs,
-            function (CodePeg $codePeg, int $position) use ($anotherCode) {
-                return $anotherCode->hasSamePegOnPosition($position, $codePeg);
-            },
-            ARRAY_FILTER_USE_BOTH
-        ));
+        return \count(\array_filter($this->codePegs, [$anotherCode, 'hasSamePegOnPosition'], ARRAY_FILTER_USE_BOTH));
+    }
+
+    private function nearMatches(Code $anotherCode): int
+    {
+        return 0;
+    }
+
+    private function hasSamePegOnPosition(CodePeg $peg, int $position): bool
+    {
+        return $peg->equals($this->codePegs[$position]);
     }
 }
