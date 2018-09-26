@@ -41,6 +41,14 @@ class Code
 
     public function match(Code $anotherCode): Feedback
     {
-        return new Feedback($anotherCode, 0, 0);
+        $exactMatches = 0;
+
+        foreach ($this->codePegs as $index => $peg) {
+            if ($peg->equals($anotherCode->codePegs[$index])) {
+                $exactMatches++;
+            }
+        }
+
+        return new Feedback($anotherCode, $exactMatches, 0);
     }
 }
