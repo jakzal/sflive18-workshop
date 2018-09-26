@@ -38,4 +38,9 @@ class Code
     {
         return $this->codePegs;
     }
+
+    public function match(Code $anotherCode): Feedback
+    {
+        return new Feedback($anotherCode, 0, 0);
+    }
 }
