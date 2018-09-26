@@ -55,31 +55,9 @@ class CodeTest extends TestCase
 
     public function provideExactAndNearMatches()
     {
-        return [
-            [
-                'Red Green Yellow Blue',
-                'Purple Purple Purple Purple',
-                0,
-                0,
-            ],
-            [
-                'Red Green Yellow Blue',
-                'Red Purple Purple Purple',
-                1,
-                0,
-            ],
-            [
-                'Red Green Yellow Blue',
-                'Red Green Purple Purple',
-                2,
-                0,
-            ],
-            [
-                'Red Green Yellow Blue',
-                'Red Green Yellow Blue',
-                4,
-                0,
-            ],
-        ];
+        yield ['Red Green Yellow Blue', 'Purple Purple Purple Purple', 0, 0];
+        yield ['Red Green Yellow Blue', 'Red Purple Purple Purple', 1, 0];
+        yield ['Red Green Yellow Blue', 'Red Green Purple Purple', 2, 0];
+        yield ['Red Green Yellow Blue', 'Red Green Yellow Blue', 4, 0];
     }
 }
