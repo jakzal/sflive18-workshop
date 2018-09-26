@@ -68,4 +68,11 @@ class CodeTest extends TestCase
         yield ['Yellow Red Red Red', 'Purple Purple Purple Red', 1, 0];
         yield ['Red Red Blue Yellow', 'Purple Purple Red Purple', 0, 1];
     }
+
+    public function test_length_returns_the_number_of_pegs()
+    {
+        $code = Code::fromString('Red Purple Green Yellow Green');
+
+        $this->assertSame(5, $code->length());
+    }
 }
