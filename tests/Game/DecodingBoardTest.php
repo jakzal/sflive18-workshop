@@ -6,6 +6,7 @@ use App\Game\Code;
 use App\Game\DecodingBoard;
 use App\Game\Feedback;
 use App\Game\GameUuid;
+use App\Game\NoAttemptsLeftException;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 
@@ -57,5 +58,15 @@ class DecodingBoardTest extends TestCase
         $feedback = $this->board->makeGuess($this->guessCode->reveal());
 
         $this->assertSame($this->feedback, $feedback);
+    }
+
+    public function test_makeGuess_throws_a_NoAttemptsLeftException_if_number_of_attempts_is_exceeded()
+    {
+        $this->expectException(NoAttemptsLeftException::class);
+        $this->expectExceptionMessage(sprintf('All of the %d attempts were already used.', self::NUMBER_OF_ATTEMPTS));
+
+        for ($i = 0; $i <= self::NUMBER_OF_ATTEMPTS; $i++) {
+            $this->board->makeGuess($this->guessCode->reveal());
+        }
     }
 }
