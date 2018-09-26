@@ -4,7 +4,7 @@ namespace App\Game;
 
 class CodePeg
 {
-    private const AVAILABLE_COLOURS = ['Red', 'Green', 'Blue', 'Yellow', 'Purple'];
+    public const AVAILABLE_COLOURS = ['Red', 'Green', 'Blue', 'Yellow', 'Purple'];
 
     private $colour;
 
