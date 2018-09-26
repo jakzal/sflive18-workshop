@@ -141,4 +141,15 @@ class DecodingBoardTest extends TestCase
     {
         $this->assertFalse($this->board->isGameWon());
     }
+
+    public function test_the_game_lost_if_there_is_no_more_attempts_left_and_the_code_was_not_broken()
+    {
+        $this->feedback->exactMatches()->willReturn(1);
+
+        for ($i = 0; $i < self::NUMBER_OF_ATTEMPTS; $i++) {
+            $this->board->makeGuess($this->guessCode->reveal());
+        }
+
+        $this->assertTrue($this->board->isGameLost());
+    }
 }
