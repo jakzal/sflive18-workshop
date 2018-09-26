@@ -38,14 +38,28 @@ class CodeTest extends TestCase
         );
     }
 
-    public function test_match_gives_feedback_on_exact_matches()
+    /**
+     * @dataProvider provideExactMatches
+     */
+    public function test_match_gives_feedback_on_exact_matches(string $codeString, string $anotherCodeString, int $expectedMatches)
     {
-        $code = Code::fromString('Red Green Yellow Blue');
-        $anotherCode = Code::fromString('Purple Purple Purple Purple');
+        $code = Code::fromString($codeString);
+        $anotherCode = Code::fromString($anotherCodeString);
 
         $feedback = $code->match($anotherCode);
 
         $this->assertSame($anotherCode, $feedback->guessCode());
-        $this->assertSame(0, $feedback->exactMatches());
+        $this->assertSame($expectedMatches, $feedback->exactMatches());
+    }
+
+    public function provideExactMatches()
+    {
+        return [
+            [
+                'Red Green Yellow Blue',
+                'Purple Purple Purple Purple',
+                0,
+            ],
+        ];
     }
 }
