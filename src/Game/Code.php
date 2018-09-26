@@ -51,7 +51,17 @@ class Code
 
     private function nearMatches(Code $anotherCode): int
     {
-        return 0;
+        $matches = 0;
+
+        foreach ($this->codePegs as $position => $peg) {
+            foreach ($anotherCode->codePegs as $anotherPosition => $anotherPeg) {
+                if ($anotherPosition !== $position && $peg->equals($anotherPeg)) {
+                    $matches++;
+                }
+            }
+        }
+
+        return $matches;
     }
 
     private function pegsWithExactMatches(Code $anotherCode): array
