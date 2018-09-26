@@ -45,3 +45,12 @@ Now you should be able to use `composer` and `php` via the `workshop.sh` script:
 ```
 
 You're good to go as soon as composer finishes with no issues.
+
+## Exercises
+
+* [Exercise 1](exercises/1.md)
+* [Exercise 2](exercises/2.md)
+* [Exercise 3](exercises/3.md)
+* [Exercise 4](exercises/4.md)
+* [Exercise 5](exercises/5.md)
+* [Exercise 6](exercises/6.md)
