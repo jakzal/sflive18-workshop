@@ -26,14 +26,14 @@ class Code
         );
     }
 
-    public static function fromColours(array $array)
+    public static function fromColours(array $colours)
     {
         return new self(
             array_map(
                 function (string $colour) {
                     return new CodePeg($colour);
                 },
-                $array
+                $colours
             )
         );
     }
