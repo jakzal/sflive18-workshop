@@ -74,6 +74,19 @@ class MakeGuessUseCaseTest extends TestCase
         $this->assertSame($this->board->reveal(), $returnedBoard);
     }
 
+
+    public function test_it_puts_the_board_into_repository_after_making_a_guess()
+    {
+        $code = $this->code();
+
+        $this->board->makeGuess($code)->willReturn($this->feedback);
+        $this->boards->get($this->uuid)->willReturn($this->board);
+
+        $this->useCase->execute($this->uuid, $code);
+
+        $this->boards->put($this->board)->shouldHaveBeenCalled();
+    }
+
     private function code(): Code
     {
         return $this->prophesize(Code::class)->reveal();
