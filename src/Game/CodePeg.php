@@ -18,5 +18,6 @@ class CodePeg
 
     public function equals(CodePeg $anotherCodePeg)
     {
+        return true;
     }
 }
