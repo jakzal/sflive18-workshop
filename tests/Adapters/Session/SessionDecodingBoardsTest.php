@@ -9,6 +9,8 @@ use App\Game\DecodingBoardNotFoundException;
 use App\Game\DecodingBoards;
 use App\Game\GameUuid;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
 
 class SessionDecodingBoardsTest extends TestCase
 {
@@ -22,7 +24,7 @@ class SessionDecodingBoardsTest extends TestCase
 
     protected function setUp()
     {
-        $this->decodingBoards = new SessionDecodingBoards();
+        $this->decodingBoards = new SessionDecodingBoards(new Session(new MockArraySessionStorage()));
     }
 
     public function test_it_is_a_decoding_boards_repository()
@@ -39,5 +41,16 @@ class SessionDecodingBoardsTest extends TestCase
 
         $this->decodingBoards->put($board);
         $this->decodingBoards->get(GameUuid::existing(self::UUID));
+    }
+
+    public function test_it_gets_the_previously_added_decoding_board()
+    {
+        $uuid = GameUuid::existing(self::UUID);
+        $board = new DecodingBoard($uuid, Code::fromString('Red Blue'), 12);
+
+        $this->decodingBoards->put($board);
+        $foundBoard = $this->decodingBoards->get(GameUuid::existing(self::UUID));
+
+        $this->assertEquals($board, $foundBoard);
     }
 }
