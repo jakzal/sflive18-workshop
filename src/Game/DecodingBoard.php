@@ -38,8 +38,8 @@ class DecodingBoard
         return count($this->feedback) >= $this->numberOfAttempts;
     }
 
-    public function lastFeedback(): Feedback
+    public function lastFeedback(): ?Feedback
     {
-        return \end($this->feedback);
+        return \end($this->feedback) ?: null;
     }
 }
