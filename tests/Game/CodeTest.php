@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Game;
+namespace App\Tests\Game;
 
 use App\Game\Code;
 use App\Game\CodePeg;

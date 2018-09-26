@@ -11,5 +11,6 @@ class Code
 
     public function pegs()
     {
+        return [];
     }
 }
