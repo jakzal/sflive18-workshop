@@ -45,6 +45,6 @@ class DecodingBoard
 
     public function isGameWon(): bool
     {
-        return true;
+        return $this->lastFeedback()->exactMatches() === $this->secretCode->length();
     }
 }
