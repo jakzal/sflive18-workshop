@@ -9,6 +9,7 @@ use App\Game\Feedback;
 use App\Game\GameUuid;
 use App\UseCase\MakeGuessUseCase;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 
 class MakeGuessUseCaseTest extends TestCase
@@ -46,6 +47,8 @@ class MakeGuessUseCaseTest extends TestCase
         $this->uuid = GameUuid::existing(self::GAME_UUID);
         $this->feedback = $this->prophesize(Feedback::class);
         $this->boards = $this->prophesize(DecodingBoards::class);
+
+        $this->boards->put(Argument::any())->willReturn();
 
         $this->useCase = new MakeGuessUseCase($this->boards->reveal());
     }
