@@ -52,4 +52,9 @@ class DecodingBoard
     {
         return $this->hasAnyAttemptsLeft() && !$this->isGameWon();
     }
+
+    public function isGameFinished(): bool
+    {
+        return true;
+    }
 }
