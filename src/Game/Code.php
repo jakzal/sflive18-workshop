@@ -16,14 +16,7 @@ class Code
 
     public static function fromString(string $colourString): self
     {
-        return new self(
-            array_map(
-                function (string $colour) {
-                    return new CodePeg($colour);
-                },
-                explode(' ', $colourString)
-            )
-        );
+        return self::fromColours(explode(' ', $colourString));
     }
 
     public static function fromColours(array $colours): self
