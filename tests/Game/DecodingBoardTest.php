@@ -48,6 +48,7 @@ class DecodingBoardTest extends TestCase
         $this->secretCode = $this->prophesize(Code::class);
 
         $this->secretCode->match($this->guessCode)->willReturn($this->feedback->reveal());
+        $this->secretCode->length()->willReturn(self::SECRET_LENGTH);
 
         $this->board = new DecodingBoard($this->uuid, $this->secretCode->reveal(), self::NUMBER_OF_ATTEMPTS);
     }

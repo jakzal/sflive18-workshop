@@ -50,6 +50,6 @@ class DecodingBoard
 
     public function isGameLost(): bool
     {
-        return $this->hasAnyAttemptsLeft();
+        return $this->hasAnyAttemptsLeft() && !$this->isGameWon();
     }
 }
