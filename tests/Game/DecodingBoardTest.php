@@ -90,4 +90,24 @@ class DecodingBoardTest extends TestCase
         $this->assertCount(2, $allFeedback);
         $this->assertSame([$feedback1, $feedback2], $allFeedback);
     }
+
+    public function test_lastFeedback_exposes_the_last_feedback()
+    {
+        $code1 = $this->prophesize(Code::class)->reveal();
+        $code2 = $this->prophesize(Code::class)->reveal();
+
+        $feedback1 = $this->prophesize(Feedback::class)->reveal();
+        $feedback2 = $this->prophesize(Feedback::class)->reveal();
+
+        $this->secretCode->match($code1)->willReturn($feedback1);
+        $this->secretCode->match($code2)->willReturn($feedback2);
+
+        $this->board->makeGuess($code1);
+        $this->board->makeGuess($code2);
+
+        $lastFeedback = $this->board->lastFeedback();
+
+        $this->assertInstanceOf(Feedback::class, $lastFeedback);
+        $this->assertSame($feedback2, $lastFeedback);
+    }
 }
