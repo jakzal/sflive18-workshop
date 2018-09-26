@@ -13,4 +13,12 @@ class CodePegTest extends TestCase
 
         $this->assertSame('Red', (string) $codePeg);
     }
+
+    public function test_equals_returns_true_if_two_pegs_are_of_the_same_colour()
+    {
+        $codePeg = new CodePeg('Red');
+        $anotherCodePeg = new CodePeg('Red');
+
+        $this->assertTrue($codePeg->equals($anotherCodePeg));
+    }
 }
