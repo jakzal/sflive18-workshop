@@ -19,5 +19,7 @@ class MakeGuessUseCase
     {
         $board = $this->boards->get($uuid);
         $board->makeGuess($guessCode);
+
+        return $board;
     }
 }
