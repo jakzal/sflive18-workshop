@@ -20,11 +20,10 @@ class StartGameUseCase
         $this->numberOfAttempts = $numberOfAttempts;
     }
 
-    public function execute(GameUuid $uuid, int $codeLength)
+    public function execute(GameUuid $uuid, int $codeLength): void
     {
         $secretCode = $this->codeMaker->newCode($codeLength);
-        $board = new DecodingBoard($uuid, $secretCode, $this->numberOfAttempts);
 
-        $this->boards->put($board);
+        $this->boards->put(new DecodingBoard($uuid, $secretCode, $this->numberOfAttempts));
     }
 }
