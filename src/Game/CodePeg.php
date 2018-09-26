@@ -16,7 +16,7 @@ class CodePeg
         return $this->colour;
     }
 
-    public function equals(CodePeg $anotherCodePeg)
+    public function equals(CodePeg $anotherCodePeg): bool
     {
         return true;
     }
