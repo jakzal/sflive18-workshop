@@ -22,4 +22,19 @@ class CodeTest extends TestCase
             $code->pegs()
         );
     }
+
+    public function test_it_is_created_from_an_array_of_code_peg_strings()
+    {
+        $code = Code::fromColours(['Red', 'Green', 'Blue']);
+
+        $this->assertInstanceOf(Code::class, $code);
+        $this->assertEquals(
+            [
+                new CodePeg('Red'),
+                new CodePeg('Green'),
+                new CodePeg('Blue'),
+            ],
+            $code->pegs()
+        );
+    }
 }
