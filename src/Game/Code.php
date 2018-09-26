@@ -46,12 +46,17 @@ class Code
 
     private function exactMatches(Code $anotherCode): int
     {
-        return \count(\array_filter($this->codePegs, [$anotherCode, 'hasSamePegOnPosition'], ARRAY_FILTER_USE_BOTH));
+        return \count($this->pegsWithExactMatches($anotherCode));
     }
 
     private function nearMatches(Code $anotherCode): int
     {
         return 0;
+    }
+
+    private function pegsWithExactMatches(Code $anotherCode): array
+    {
+        return \array_filter($this->codePegs, [$anotherCode, 'hasSamePegOnPosition'], ARRAY_FILTER_USE_BOTH);
     }
 
     private function hasSamePegOnPosition(CodePeg $peg, int $position): bool
