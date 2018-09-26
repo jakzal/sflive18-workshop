@@ -136,4 +136,9 @@ class DecodingBoardTest extends TestCase
 
         $this->assertFalse($this->board->isGameWon());
     }
+
+    public function test_the_game_is_not_won_if_there_was_no_guess_attempt_yet()
+    {
+        $this->assertFalse($this->board->isGameWon());
+    }
 }
