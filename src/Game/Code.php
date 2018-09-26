@@ -41,13 +41,7 @@ class Code
 
     public function match(Code $anotherCode): Feedback
     {
-        $exactMatches = 0;
-
-        foreach ($this->codePegs as $position => $peg) {
-            if ($anotherCode->hasSamePegOnPosition($position, $peg)) {
-                $exactMatches++;
-            }
-        }
+        $exactMatches = $this->exactMatches($anotherCode);
 
         return new Feedback($anotherCode, $exactMatches, 0);
     }
@@ -55,5 +49,17 @@ class Code
     private function hasSamePegOnPosition(int $position, CodePeg $peg): bool
     {
         return $peg->equals($this->codePegs[$position]);
+    }
+
+    private function exactMatches(Code $anotherCode): int
+    {
+        $exactMatches = 0;
+
+        foreach ($this->codePegs as $position => $peg) {
+            if ($anotherCode->hasSamePegOnPosition($position, $peg)) {
+                $exactMatches++;
+            }
+        }
+        return $exactMatches;
     }
 }
