@@ -22,9 +22,16 @@ services:
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
+    App\Adapters\Web\Controller\:
+        resource: '../src/Adapters/Web/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Game\DecodingBoards: '@App\Adapters\Session\SessionDecodingBoards'
+    App\Game\CodeMaker: '@App\Game\RandomCodeMaker'
+
+    App\UseCase\StartGameUseCase:
+        arguments:
+            $numberOfAttempts: 12

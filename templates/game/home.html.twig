@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <p>
+    <form method="post" action="{{ path('mastermind.new_game') }}">
+        <input type="submit" class="btn btn-lg btn-success" value="Start a new game" role="button"/>
+    </form>
+    </p>
+{% endblock %}

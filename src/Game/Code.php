@@ -11,7 +11,7 @@ class Code
      */
     private function __construct(array $codePegs)
     {
-        $this->codePegs = $codePegs;
+        $this->codePegs = \array_values($codePegs);
     }
 
     public static function fromString(string $colourString): self
@@ -22,7 +22,7 @@ class Code
     public static function fromColours(array $colours): self
     {
         return new self(
-            array_map(
+            \array_map(
                 function (string $colour) {
                     return new CodePeg($colour);
                 },

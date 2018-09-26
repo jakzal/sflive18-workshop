@@ -75,4 +75,15 @@ class CodeTest extends TestCase
 
         $this->assertSame(5, $code->length());
     }
+
+    public function test_match_ignores_colour_indexes()
+    {
+        $code = Code::fromColours([1 => 'Red', 3 => 'Red']);
+        $anotherCode = Code::fromColours([2 => 'Red', 5 => 'Yellow']);
+
+        $feedback = $code->match($anotherCode);
+
+        $this->assertSame(1, $feedback->exactMatches());
+        $this->assertSame(0, $feedback->nearMatches());
+    }
 }
