@@ -3,6 +3,7 @@
 namespace Game;
 
 use App\Game\Code;
+use App\Game\CodePeg;
 use PHPUnit\Framework\TestCase;
 
 class CodeTest extends TestCase

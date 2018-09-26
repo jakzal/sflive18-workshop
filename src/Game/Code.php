@@ -6,5 +6,6 @@ class Code
 {
     public static function fromString(string $string)
     {
+        return new Code();
     }
 }
