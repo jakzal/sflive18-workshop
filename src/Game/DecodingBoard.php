@@ -57,4 +57,9 @@ class DecodingBoard
     {
         return $this->hasAnyAttemptsLeft() || $this->isGameWon();
     }
+
+    public function gameUuid(): GameUuid
+    {
+        return $this->gameUuid;
+    }
 }
