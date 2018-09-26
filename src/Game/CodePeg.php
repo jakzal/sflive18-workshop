@@ -18,6 +18,6 @@ class CodePeg
 
     public function equals(CodePeg $anotherCodePeg): bool
     {
-        return true;
+        return $this->colour === $anotherCodePeg->colour;
     }
 }
