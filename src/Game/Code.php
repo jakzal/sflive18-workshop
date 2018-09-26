@@ -51,22 +51,35 @@ class Code
 
     private function nearMatches(Code $anotherCode): int
     {
-        $matches = 0;
+        $positionsCounted = [];
 
-        foreach ($this->codePegs as $position => $peg) {
-            foreach ($anotherCode->codePegs as $anotherPosition => $anotherPeg) {
-                if ($anotherPosition !== $position && $peg->equals($anotherPeg)) {
-                    $matches++;
+        foreach ($this->pegsWithNoExactMatches($anotherCode) as $codePeg) {
+            foreach ($anotherCode->pegsWithNoExactMatches($this) as $position => $anotherCodePeg) {
+                if ($codePeg->equals($anotherCodePeg) && !isset($positionsCounted[$position])) {
+                    $positionsCounted[$position] = true;
+
+                    break;
                 }
             }
         }
 
-        return $matches;
+        return \count($positionsCounted);
     }
 
     private function pegsWithExactMatches(Code $anotherCode): array
     {
         return \array_filter($this->codePegs, [$anotherCode, 'hasSamePegOnPosition'], ARRAY_FILTER_USE_BOTH);
+    }
+
+    private function pegsWithNoExactMatches(Code $anotherCode): array
+    {
+        return \array_filter(
+            $this->codePegs,
+            function (CodePeg $peg, int $position) use ($anotherCode) {
+                return !$anotherCode->hasSamePegOnPosition($peg, $position);
+            },
+            ARRAY_FILTER_USE_BOTH
+        );
     }
 
     private function hasSamePegOnPosition(CodePeg $peg, int $position): bool

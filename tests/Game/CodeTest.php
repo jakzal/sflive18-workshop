@@ -60,5 +60,12 @@ class CodeTest extends TestCase
         yield ['Red Green Yellow Blue', 'Red Green Purple Purple', 2, 0];
         yield ['Red Green Yellow Blue', 'Red Green Yellow Blue', 4, 0];
         yield ['Red Green Yellow Blue', 'Purple Red Purple Purple', 0, 1];
+        yield ['Red Green Yellow Blue', 'Red Red Purple Purple', 1, 0];
+        yield ['Red Green Yellow Blue', 'Green Red Purple Purple', 0, 2];
+        yield ['Red Green Yellow Blue', 'Purple Red Red Red', 0, 1];
+        yield ['Red Red Red Yellow', 'Red Green Purple Purple', 1, 0];
+        yield ['Red Red Blue Yellow', 'Purple Purple Red Red', 0, 2];
+        yield ['Yellow Red Red Red', 'Purple Purple Purple Red', 1, 0];
+        yield ['Red Red Blue Yellow', 'Purple Purple Red Purple', 0, 1];
     }
 }
