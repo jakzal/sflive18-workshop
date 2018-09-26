@@ -4,8 +4,15 @@ namespace App\Game;
 
 class CodePeg
 {
+    private $colour;
+
+    public function __construct(string $colour)
+    {
+        $this->colour = $colour;
+    }
+
     public function __toString(): string
     {
-        return '';
+        return $this->colour;
     }
 }
