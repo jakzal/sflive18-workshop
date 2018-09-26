@@ -37,4 +37,9 @@ class DecodingBoard
     {
         return count($this->feedback) >= $this->numberOfAttempts;
     }
+
+    public function lastFeedback(): Feedback
+    {
+        return \end($this->feedback);
+    }
 }
