@@ -11,13 +11,13 @@ use PHPUnit\Framework\TestCase;
 
 abstract class DecodingBoardsTestCase extends TestCase
 {
-    private const UUID = 'd97f4f5d-2f38-459e-a08d-3b950200ba25';
-    private const INVALID_UUID = '027808e1-7f0f-46d0-8b68-9b69eb100c4d';
+    protected const UUID = 'd97f4f5d-2f38-459e-a08d-3b950200ba25';
+    protected const INVALID_UUID = '027808e1-7f0f-46d0-8b68-9b69eb100c4d';
 
     /**
      * @var DecodingBoards
      */
-    private $decodingBoards;
+    protected $decodingBoards;
 
     protected function setUp()
     {

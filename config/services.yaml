@@ -29,7 +29,7 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Game\DecodingBoards: '@App\Adapters\Session\SessionDecodingBoards'
+    App\Game\DecodingBoards: '@App\Adapters\Database\DoctrineDecodingBoards'
     App\Game\CodeMaker: '@App\Game\RandomCodeMaker'
 
     App\UseCase\StartGameUseCase:
