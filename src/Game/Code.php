@@ -26,7 +26,7 @@ class Code
         );
     }
 
-    public static function fromColours(array $colours)
+    public static function fromColours(array $colours): self
     {
         return new self(
             array_map(
