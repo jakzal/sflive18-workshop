@@ -14,19 +14,22 @@ class Code
         $this->codePegs = $codePegs;
     }
 
-    public static function fromString(string $string)
+    public static function fromString(string $colourString): self
     {
-        return new Code(
+        return new self(
             array_map(
                 function (string $colour) {
                     return new CodePeg($colour);
                 },
-                explode(' ', $string)
+                explode(' ', $colourString)
             )
         );
     }
 
-    public function pegs()
+    /**
+     * @return CodePeg[]
+     */
+    public function pegs(): array
     {
         return $this->codePegs;
     }
