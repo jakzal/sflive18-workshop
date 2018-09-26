@@ -86,4 +86,9 @@ class Code
     {
         return $peg->equals($this->codePegs[$position]);
     }
+
+    public function length(): int
+    {
+        return \count($this->codePegs);
+    }
 }
