@@ -2,6 +2,8 @@
 
 namespace App\Game;
 
+use Ramsey\Uuid\Uuid;
+
 class GameUuid
 {
     /**
@@ -21,7 +23,7 @@ class GameUuid
 
     public static function generated(): self
     {
-        return new self('');
+        return new self((string) Uuid::uuid4());
     }
 
     public function __toString(): string
