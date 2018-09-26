@@ -15,4 +15,8 @@ class CodePeg
     {
         return $this->colour;
     }
+
+    public function equals(CodePeg $anotherCodePeg)
+    {
+    }
 }
