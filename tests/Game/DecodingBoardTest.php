@@ -175,4 +175,13 @@ class DecodingBoardTest extends TestCase
 
         $this->assertFalse($this->board->isGameLost());
     }
+
+    public function test_the_game_is_finished_if_all_colours_and_positions_are_guessed()
+    {
+        $this->feedback->exactMatches()->willReturn(self::SECRET_LENGTH);
+
+        $this->board->makeGuess($this->guessCode->reveal());
+
+        $this->assertTrue($this->board->isGameFinished());
+    }
 }
