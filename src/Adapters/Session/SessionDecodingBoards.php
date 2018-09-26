@@ -14,6 +14,7 @@ final class SessionDecodingBoards implements DecodingBoards
      */
     public function get(GameUuid $uuid): DecodingBoard
     {
+        throw new DecodingBoardNotFoundException($uuid);
     }
 
     public function put(DecodingBoard $decodingBoard)
