@@ -47,4 +47,9 @@ class DecodingBoard
     {
         return null !== $this->lastFeedback() && $this->lastFeedback()->exactMatches() === $this->secretCode->length();
     }
+
+    public function isGameLost(): bool
+    {
+        return true;
+    }
 }
