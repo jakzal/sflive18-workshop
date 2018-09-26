@@ -19,6 +19,11 @@ class GameUuid
         return new self($uuid);
     }
 
+    public static function generated(): self
+    {
+        return new self('');
+    }
+
     public function __toString(): string
     {
         return $this->uuid;
