@@ -1,0 +1,10 @@
+default:
+    calls:
+        error_reporting: -1
+    gherkin:
+        filters:
+            tags: "~@wip"
+    suites:
+        mastermind:
+            contexts:
+                - MastermindContext
