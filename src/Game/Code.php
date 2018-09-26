@@ -8,4 +8,8 @@ class Code
     {
         return new Code();
     }
+
+    public function pegs()
+    {
+    }
 }
