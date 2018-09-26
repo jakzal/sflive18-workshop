@@ -4,4 +4,7 @@ namespace App\Game;
 
 class Code
 {
+    public static function fromString(string $string)
+    {
+    }
 }
