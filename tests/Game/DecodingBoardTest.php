@@ -126,4 +126,14 @@ class DecodingBoardTest extends TestCase
 
         $this->assertTrue($this->board->isGameWon());
     }
+
+    public function test_the_game_is_not_won_if_some_of_the_colours_are_on_wrong_positions()
+    {
+        $this->secretCode->length()->willReturn(self::SECRET_LENGTH);
+        $this->feedback->exactMatches()->willReturn(self::SECRET_LENGTH - 1);
+
+        $this->board->makeGuess($this->guessCode->reveal());
+
+        $this->assertFalse($this->board->isGameWon());
+    }
 }
